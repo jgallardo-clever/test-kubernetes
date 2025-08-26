@@ -18,3 +18,24 @@ spec:
         image: xatomen/app-express:latest
         ports:
         - containerPort: 3000
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+
+---
+# Exponer servicio con un LoadBalancer
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-express
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3001
+  selector:
+    app: app-express
