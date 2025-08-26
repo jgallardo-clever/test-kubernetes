@@ -1,0 +1,42 @@
+name: Disparador de orquestador
+on:
+  workflow_dispatch:
+    inputs:
+      rama:
+        description: 'Rama del repositorio'
+        required: true
+        type: choice
+        options:
+          - 'main'
+          - 'develop'
+      tecnologia:
+        description: 'Tecnología a utilizar'
+        required: true
+        type: choice
+        options:
+          - 'java-springboot-2.5.12'
+          - 'net-framework'
+          - 'php-laravel'
+          - 'nodejs'
+          - 'kubernetes'
+      requiere_compilar:
+        description: '¿Requiere compilar?'
+        required: true
+        type: boolean
+      despliegue_en:
+        description: 'Entorno de despliegue'
+        required: true
+        type: choice
+        options:
+          - 'IIS'
+          - 'AKS'
+
+jobs:
+  run-orquestador:
+    uses: jgallardo-clever/test-orquestador-fge/.github/workflows/orquestador.yml@main
+    with:
+      rama: ${{ inputs.rama }}
+      tecnologia: ${{ inputs.tecnologia }}
+      requiere_compilar: ${{ inputs.requiere_compilar }}
+      despliegue_en: ${{ inputs.despliegue_en }}
+    secrets: inherit

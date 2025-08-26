@@ -1,0 +1,20 @@
+# Deployment para la app express
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-express
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-express
+  template:
+    metadata:
+      labels:
+        app: app-express
+    spec:
+      containers:
+      - name: app-express
+        image: registry:5000/app-express:latest
+        ports:
+        - containerPort: 3000
