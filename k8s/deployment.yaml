@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: app-express
-        image: registry:5000/app-express:latest
+        image: xatomen/app-express:latest
         ports:
         - containerPort: 3000
